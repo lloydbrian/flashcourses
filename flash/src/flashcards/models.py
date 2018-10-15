@@ -33,10 +33,10 @@ class Deck(models.Model):
     deck_description = models.CharField(
                             max_length=64,
                             null=False,
-                            blank=False)
+                            blank=True)
     unique_id = models.UUIDField(
                             default=uuid.uuid4,
-                            editable= False,
+                            editable=False,
                             unique=True)
 
     def __str__(self):
