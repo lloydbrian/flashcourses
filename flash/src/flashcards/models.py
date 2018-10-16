@@ -33,7 +33,8 @@ class Deck(models.Model):
     deck_description = models.CharField(
                             max_length=64,
                             null=False,
-                            blank=False)
+                            blank=False,
+                            default="Comp705805Deck")
     unique_id = models.UUIDField(
                             default=uuid.uuid4,
                             editable= False,
