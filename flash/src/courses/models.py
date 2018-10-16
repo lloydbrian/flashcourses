@@ -55,8 +55,12 @@ class Course(models.Model):
     course_description = models.CharField(
                                 max_length=64,
                                 null=False,
+<<<<<<< HEAD
                                 blank=False,
                                 default="Comp705805")
+=======
+                                blank=True)
+>>>>>>> 1515acfd88ce842a3821754965136517c56a1f58
     unique_id = models.UUIDField(
                                 default=uuid.uuid4,
                                 editable= False,
