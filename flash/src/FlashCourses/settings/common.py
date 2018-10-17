@@ -1,6 +1,7 @@
 """
 Author: Andrea Murphy
-Last Updated: April 2018
+Edited: Lloyd Dagoc
+Last Updated: October 2018
 Relative File Path: flash/src/FlashCourses/settings/common.py
 Description: Public settings file for developing
 
@@ -26,7 +27,13 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+# Define in custom settings file. See bottome of this file
+CUSTOM_ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
+if CUSTOM_ALLOWED_HOSTS:
+    ALLOWED_HOSTS = CUSTOM_ALLOWED_HOSTS
+else:
+    ALLOWED_HOSTS = []
+# []
 
 
 # Application definition
@@ -43,6 +50,7 @@ INSTALLED_APPS = [
     'flashcards',
     'rest_framework',
     'corsheaders',
+    'django_nose',
 ]
 
 MIDDLEWARE = [
@@ -75,12 +83,22 @@ TEMPLATES = [
     },
 ]
 
+# Use nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure coverage on the 'foo' and 'bar' apps
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=accounts,courses,flashcards',
+]
+
 WSGI_APPLICATION = 'FlashCourses.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# TODO update if we want a new location of the db.sqlite3 file
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -132,6 +150,7 @@ try:
 except ImportError:
     pass
 
+# For customized settings at the environment level, check settings_private.py
 try:
     from FlashCourses.settings.settings_private import *
 except ImportError:
