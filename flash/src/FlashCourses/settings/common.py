@@ -27,13 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-# Define in custom settings file. See bottome of this file
-CUSTOM_ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
-if CUSTOM_ALLOWED_HOSTS:
-    ALLOWED_HOSTS = CUSTOM_ALLOWED_HOSTS
-else:
-    ALLOWED_HOSTS = []
-# []
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -86,7 +80,7 @@ TEMPLATES = [
 # Use nose to run all tests
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-# Tell nose to measure coverage on the 'foo' and 'bar' apps
+# Apps covered by the coverage API.
 NOSE_ARGS = [
     '--with-coverage',
     '--cover-package=accounts,courses,flashcards',
@@ -97,8 +91,6 @@ WSGI_APPLICATION = 'FlashCourses.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-# TODO update if we want a new location of the db.sqlite3 file
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
