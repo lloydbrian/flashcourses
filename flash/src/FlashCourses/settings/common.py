@@ -142,7 +142,6 @@ try:
 except ImportError:
     pass
 
-# For customized settings at the environment level, check settings_private.py
 try:
     from FlashCourses.settings.settings_private import *
 except ImportError:
